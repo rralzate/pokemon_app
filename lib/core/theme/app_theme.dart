@@ -16,9 +16,16 @@ const colorSchema = ColorScheme(
   onSurface: mainGrey,
 );
 
+const appBarTheme = AppBarTheme(
+  backgroundColor: secondaryBlue,
+  elevation: 0,
+  centerTitle: true,
+);
+
 final appTheme = ThemeData(
   primaryColor: mainBlue,
   scaffoldBackgroundColor: mainWhite,
-  textTheme: GoogleFonts.assetTextTheme(GoogleFonts.montserratTextTheme()),
+  textTheme: GoogleFonts.assistantTextTheme(GoogleFonts.montserratTextTheme()),
   colorScheme: colorSchema.copyWith(error: errorColor),
+  appBarTheme: appBarTheme,
 );

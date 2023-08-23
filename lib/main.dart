@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokemon_app/core/routes/page_generator.dart';
 import 'package:pokemon_app/core/theme/app_theme.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'features/pokemon/presentation/screens/pokemons_screen.dart';
 
@@ -13,11 +14,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Pokemon App',
-      theme: appTheme,
-      initialRoute: PokemonsScreen.routeName,
-      onGenerateRoute: PageGenerator.getNamedScreen,
+    return ResponsiveSizer(
+      builder: (context, orientation, screenType) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Pokemon App',
+          theme: appTheme,
+          initialRoute: PokemonsScreen.routeName,
+          onGenerateRoute: PageGenerator.getNamedScreen,
+        );
+      },
     );
   }
 }
