@@ -10,21 +10,21 @@ const colorSchema = ColorScheme(
   onSecondary: mainBlue,
   error: errorColor,
   onError: errorColor,
-  background: mainWhite,
+  background: Colors.black,
   onBackground: mainGrey,
   surface: mainWhite,
   onSurface: mainGrey,
 );
 
 const appBarTheme = AppBarTheme(
-  backgroundColor: secondaryBlue,
+  backgroundColor: mainBlack,
   elevation: 0,
   centerTitle: true,
 );
 
 final appTheme = ThemeData(
   primaryColor: mainBlue,
-  scaffoldBackgroundColor: mainWhite,
+  scaffoldBackgroundColor: mainBlack,
   textTheme: GoogleFonts.assistantTextTheme(GoogleFonts.montserratTextTheme()),
   colorScheme: colorSchema.copyWith(error: errorColor),
   appBarTheme: appBarTheme,
