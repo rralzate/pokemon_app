@@ -86,24 +86,29 @@ class _PokemonsScreenState extends State<PokemonsScreen> {
       controller: _scrollController,
       slivers: [
         SliverGrid(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                if (listPokemons.isNotEmpty) {
-                  var item = listPokemons[index];
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              if (listPokemons.isNotEmpty) {
+                var item = listPokemons[index];
 
-                  return PokemonCard(
-                      id: item.id,
-                      image: getPokemonImage(item.id),
-                      color: item.color,
-                      onTap: () {});
-                } else {
-                  return const CustomLoadingScreen();
-                }
-              },
-              childCount: listPokemons.length,
-            ),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2))
+                return PokemonCard(
+                    id: item.id,
+                    image: getPokemonImage(item.id),
+                    color: item.color,
+                    name: item.name,
+                    onTap: () {
+                      //! Consumir el evento del bloc que permite consultar el detalle del pokemon y navegar a la pantalla de detalle
+                    });
+              } else {
+                return const SizedBox.shrink();
+              }
+            },
+            childCount: listPokemons.length,
+          ),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+          ),
+        )
       ],
     );
   }

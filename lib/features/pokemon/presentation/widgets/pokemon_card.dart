@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+
+import '../../../../core/theme/fonts.dart';
 
 class PokemonCard extends StatelessWidget {
   const PokemonCard({
@@ -7,12 +10,14 @@ class PokemonCard extends StatelessWidget {
     required this.image,
     required this.color,
     required this.onTap,
+    required this.name,
   });
 
   final String id;
   final String image;
   final Color color;
   final Function onTap;
+  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +34,24 @@ class PokemonCard extends StatelessWidget {
               decoration: BoxDecoration(
                   color: color,
                   borderRadius: const BorderRadius.all(Radius.circular(20))),
-              child: Hero(
-                tag: 'Pokemon-$id',
-                child: Image(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(image),
+              child: Column(children: [
+                SizedBox(
+                  height: 2.h,
                 ),
-              ),
+                Hero(
+                  tag: 'Pokemon-$id',
+                  child: Image(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(image),
+                    width: 120,
+                    height: 120,
+                  ),
+                ),
+                Text(
+                  name,
+                  style: textBlackStyle,
+                ),
+              ]),
             ),
             Positioned(
                 top: 0.0,
