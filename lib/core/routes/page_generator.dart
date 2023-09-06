@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:pokemon_app/features/pokemon/domain/entities/arguments_poken_detail.dart';
 import 'package:pokemon_app/features/pokemon/presentation/screens/pekemon_detail_screen.dart';
 import 'package:pokemon_app/features/pokemon/presentation/screens/pokemons_screen.dart';
 
@@ -15,7 +16,10 @@ class PageGenerator {
         builder = (context) => const PokemonsScreen();
         break;
       case PokemonDetailScreen.routeName:
-        builder = (context) => const PokemonDetailScreen();
+        builder = (context) => PokemonDetailScreen(
+              paramPokemonDetail:
+                  routeSettings.arguments as ArgumentsPokemonDetailScreen,
+            );
         break;
       default:
         builder = (context) => const Material(

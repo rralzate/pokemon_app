@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pokemon_app/core/components/custom_loading.dart';
 import 'package:pokemon_app/core/network/server_info.dart';
+import 'package:pokemon_app/features/pokemon/domain/entities/arguments_poken_detail.dart';
 import 'package:pokemon_app/features/pokemon/domain/entities/pokemon_entity.dart';
 import 'package:pokemon_app/features/pokemon/presentation/bloc/pokemon_bloc.dart';
 import 'package:pokemon_app/features/pokemon/presentation/widgets/pokemon_card.dart';
@@ -10,6 +11,7 @@ import 'package:pokemon_app/injection_container.dart';
 
 import '../../../../core/components/custom_dialog_box.dart';
 import '../../../../core/routes/resource_icons.dart';
+import 'pekemon_detail_screen.dart';
 
 class PokemonsScreen extends StatefulWidget {
   const PokemonsScreen({Key? key}) : super(key: key);
@@ -29,16 +31,10 @@ class _PokemonsScreenState extends State<PokemonsScreen> {
   @override
   void initState() {
     super.initState();
-    pokemonBloc.add(GetUserInfoStorageEvent());
+    pokemonBloc.add(GetPokemonsInfoEvent());
     _scrollController.addListener(() {
       if (!_isLoading && _scrollController.position.extentAfter == 0.0) {}
     });
-  }
-
-  @override
-  void dispose() {
-    pokemonBloc.close();
-    super.dispose();
   }
 
   @override
@@ -86,29 +82,35 @@ class _PokemonsScreenState extends State<PokemonsScreen> {
       controller: _scrollController,
       slivers: [
         SliverGrid(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) {
-              if (listPokemons.isNotEmpty) {
-                var item = listPokemons[index];
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                if (listPokemons.isNotEmpty) {
+                  var item = listPokemons[index];
 
-                return PokemonCard(
-                    id: item.id,
-                    image: getPokemonImage(item.id),
-                    color: item.color,
-                    name: item.name,
-                    onTap: () {
-                      //! Consumir el evento del bloc que permite consultar el detalle del pokemon y navegar a la pantalla de detalle
-                    });
-              } else {
-                return const SizedBox.shrink();
-              }
-            },
-            childCount: listPokemons.length,
-          ),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-          ),
-        )
+                  return PokemonCard(
+                      id: item.id,
+                      image: getPokemonImage(item.id),
+                      color: item.color,
+                      name: item.name,
+                      onTap: () {
+                        ArgumentsPokemonDetailScreen
+                            paramsPokemonDetailUseCase =
+                            ArgumentsPokemonDetailScreen(
+                          pokemonName: item.name,
+                          pokemonBloc: pokemonBloc,
+                        );
+                        Navigator.pushNamed(
+                            context, PokemonDetailScreen.routeName,
+                            arguments: paramsPokemonDetailUseCase);
+                      });
+                } else {
+                  return const CustomLoadingScreen();
+                }
+              },
+              childCount: listPokemons.length,
+            ),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2))
       ],
     );
   }
@@ -119,7 +121,7 @@ class _PokemonsScreenState extends State<PokemonsScreen> {
       builder: (BuildContext context) {
         return CustomDialogBox(
           icon: SvgPicture.asset(warningModalSVG),
-          title: '!Lo lamantamos',
+          title: '!Lo lamentamos',
           descriptions: message,
           confirmText: 'Aceptar',
           onAccept: () {

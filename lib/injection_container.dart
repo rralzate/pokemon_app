@@ -4,6 +4,7 @@ import 'package:pokemon_app/core/network/server_api_client.dart';
 import 'package:pokemon_app/features/pokemon/data/datasources/pokemon_datasource_impl.dart';
 import 'package:pokemon_app/features/pokemon/data/repositories/pokemon_repository_impl.dart';
 import 'package:pokemon_app/features/pokemon/domain/repositories/pokemon_repository.dart';
+import 'package:pokemon_app/features/pokemon/domain/usescases/get_pokemon_detail_usecase.dart';
 import 'package:pokemon_app/features/pokemon/domain/usescases/get_pokemon_list_usecase.dart';
 import 'package:pokemon_app/features/pokemon/presentation/bloc/pokemon_bloc.dart';
 
@@ -16,11 +17,14 @@ Future<void> injectDependencies() async {
   getIt.registerFactory(
     () => PokemonBloc(
       getPokemonListUseCase: getIt(),
+      getPokemonDetailUseCase: getIt(),
     ),
   );
 
   //! Usescases
   getIt.registerLazySingleton(() => GetPokemonListUseCase(repository: getIt()));
+  getIt.registerLazySingleton(
+      () => GetPokemonDetailUseCase(repository: getIt()));
 
   //! Repositories
   getIt.registerLazySingleton<PokemonRepository>(() => PokemonRepositoryImpl(

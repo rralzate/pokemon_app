@@ -5,8 +5,17 @@ sealed class PokemonEvent {
   List<Object?> get props => [];
 }
 
-class GetUserInfoStorageEvent extends PokemonEvent {
-  GetUserInfoStorageEvent();
+class GetPokemonsInfoEvent extends PokemonEvent {
+  GetPokemonsInfoEvent();
+
+  @override
+  List<Object> get props => [];
+}
+
+class GetPokemonDetailInfoEvent extends PokemonEvent {
+  final String pokemonName;
+
+  GetPokemonDetailInfoEvent({required this.pokemonName});
 
   @override
   List<Object> get props => [];

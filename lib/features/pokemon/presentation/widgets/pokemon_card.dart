@@ -16,14 +16,14 @@ class PokemonCard extends StatelessWidget {
   final String id;
   final String image;
   final Color color;
-  final Function onTap;
+  final VoidCallback onTap;
   final String name;
 
   @override
   Widget build(BuildContext context) {
     return Material(
       child: InkWell(
-        onTap: onTap(),
+        onTap: onTap,
         child: Stack(
           alignment: Alignment.center,
           children: [
@@ -34,24 +34,24 @@ class PokemonCard extends StatelessWidget {
               decoration: BoxDecoration(
                   color: color,
                   borderRadius: const BorderRadius.all(Radius.circular(20))),
-              child: Column(children: [
-                SizedBox(
-                  height: 2.h,
-                ),
-                Hero(
-                  tag: 'Pokemon-$id',
-                  child: Image(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(image),
-                    width: 120,
-                    height: 120,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 2.h,
                   ),
-                ),
-                Text(
-                  name,
-                  style: textBlackStyle,
-                ),
-              ]),
+                  Hero(
+                    tag: 'Pokemon-$id',
+                    child: Image(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(image),
+                    ),
+                  ),
+                  Text(
+                    name,
+                    style: textBlackStyle,
+                  ),
+                ],
+              ),
             ),
             Positioned(
                 top: 0.0,

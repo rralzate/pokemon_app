@@ -6,6 +6,7 @@ import 'package:pokemon_app/core/network/exception.dart';
 
 import 'package:pokemon_app/core/network/failure.dart';
 import 'package:pokemon_app/features/pokemon/data/models/pokemon_model.dart';
+import 'package:pokemon_app/features/pokemon/domain/entities/pokemon_detail_entity.dart';
 
 import 'package:pokemon_app/features/pokemon/domain/entities/pokemon_entity.dart';
 
@@ -55,6 +56,23 @@ class PokemonRepositoryImpl extends PokemonRepository {
       return right(listEntity);
     } on ServerException catch (e) {
       return Left(ErrorFailure(error: e.message));
+    } on Object {
+      return Left(ErrorFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, PokemonDetailEntity>> getPokemonDetail(
+      {required String pokemonName}) async {
+    try {
+      final result = await pokemonDatasource.getPokemonDetail(
+        name: pokemonName,
+      );
+      return right(result);
+    } on ServerException catch (e) {
+      return Left(ErrorFailure(error: e.message));
+    } on Object {
+      return Left(ErrorFailure());
     }
   }
 }

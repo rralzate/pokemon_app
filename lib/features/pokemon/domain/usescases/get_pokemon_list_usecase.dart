@@ -14,6 +14,10 @@ class GetPokemonListUseCase implements UseCase<List<PokemonEntity>, NoParams> {
 
   @override
   Future<Either<Failure, List<PokemonEntity>>> call(NoParams params) async {
-    return await repository.getPokemonList();
+    final result = await repository.getPokemonList();
+    return result.fold(
+      (failure) => Left(failure),
+      (resp) => Right(resp),
+    );
   }
 }
