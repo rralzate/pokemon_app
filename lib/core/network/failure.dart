@@ -34,62 +34,10 @@ class ServerFailure extends Failure {
 
 //General failures
 
-class CacheFailure extends Failure {
-  final Object? message;
-
-  CacheFailure({
-    this.message,
-  });
-
-  @override
-  List<Object?> get props => [
-        message,
-      ];
-}
-
 class ConnectionFailure extends Failure {
   final Object? message;
 
   ConnectionFailure({
-    this.message,
-  });
-
-  @override
-  List<Object?> get props => [
-        message,
-      ];
-}
-
-class AuthenticationFailure extends Failure {
-  final Object? message;
-
-  AuthenticationFailure({
-    this.message,
-  });
-
-  @override
-  List<Object?> get props => [
-        message,
-      ];
-}
-
-class SynchronizationFailure extends Failure {
-  final Object? message;
-
-  SynchronizationFailure({
-    this.message,
-  });
-
-  @override
-  List<Object?> get props => [
-        message,
-      ];
-}
-
-class DataBaseFailure extends Failure {
-  final Object? message;
-
-  DataBaseFailure({
     this.message,
   });
 

@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:pokemon_app/features/pokemon/domain/entities/pokemon_entity.dart';
 
 class PokemonModel extends PokemonEntity {
-  PokemonModel(
-      {required super.id,
-      required super.name,
-      required super.url,
-      required super.color});
+  PokemonModel({
+    required super.id,
+    required super.name,
+    required super.url,
+    required super.color,
+  });
 
   factory PokemonModel.fromJson(Map<String, dynamic> json) {
     return PokemonModel(

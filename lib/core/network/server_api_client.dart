@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
-import '../utils/transversal.dart';
 import 'exception.dart';
 import 'network_info.dart';
 
@@ -110,68 +109,6 @@ class ServerApiClient {
         serverSchema,
         queryParameters: queryParameters,
         headers: headers,
-      ),
-    );
-  }
-
-  ///Method HTTP POST protocol
-  Future<http.Response> post(
-    host,
-    path,
-    serverScheme, {
-    Map<String, String>? queryParameters,
-    Map<String, String>? headers,
-    Object? body,
-    Encoding? encoding,
-  }) async {
-    final url = Uri(
-      scheme: serverScheme,
-      host: host,
-      path: path,
-      queryParameters: queryParameters,
-    );
-
-    final Map<String, String> allHeaders = _authHeader;
-
-    if (headers != null) {
-      allHeaders.addAll(headers);
-    }
-    if (!allHeaders.containsKey('Content-Type')) {
-      allHeaders['Content-Type'] = "application/json";
-    }
-
-    http.Response response;
-
-    try {
-      response = await http.post(
-        url,
-        headers: allHeaders,
-        body: Transversal().fixJson(jsonEncode(body)),
-        encoding: encoding,
-      );
-    } catch (e) {
-      final check = await networkInfoRepository.hasConnection;
-
-      if (!check) {
-        throw ConnectionException();
-      }
-      rethrow;
-    }
-
-    if (kDebugMode) {
-      log(_formatResponseLog(response));
-    }
-
-    return _processResponse(
-      response: response,
-      requestFunc: () => post(
-        host,
-        path,
-        serverScheme,
-        queryParameters: queryParameters,
-        headers: headers,
-        body: body,
-        encoding: encoding,
       ),
     );
   }

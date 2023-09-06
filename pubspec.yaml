@@ -28,20 +28,29 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  # pagina donde de descargan las dependencias #! https://pub.dev/ 
   bloc: ^8.1.2
+  #!Paquete para verificar si el dispositivo tiene internet
   connectivity_plus: ^4.0.2
   cupertino_icons: ^1.0.2
+  #! En los casos de uso poder retornar 2 tipos la fallia y la exitosa
   dartz: ^0.10.1
   equatable: ^2.0.5
   flutter:
     sdk: flutter
+  #!Manejador de estados de la aplicacion
   flutter_bloc: ^8.1.3
+  #!Poder visualizar imagenes en el formato SVG
   flutter_svg: ^2.0.7
+  #! Paquete para realizar la inyeccion de dependencias
   get_it: ^7.6.0
+  #! Paquete de fuentes y tipos de letras en la aplicacion
   google_fonts: ^5.1.0
+  #! Paquete que permite realizar las peticiones HTTP Get hacia la API de Pokemon
   http: ^1.1.0
   meta: ^1.9.1
   modal_bottom_sheet: ^3.0.0-pre
+  #! Paquete para manejar diferentes tamaños en la aplicacion y q sea responsive
   responsive_sizer: ^3.2.0
 
 dev_dependencies:
